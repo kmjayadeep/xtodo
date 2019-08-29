@@ -1,0 +1,10 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_DATABASE=xtodo
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3306:3306
