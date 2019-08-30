@@ -9,7 +9,7 @@ export default function createTaskModel(sequelize, DataTypes) {
     dueBy: DataTypes.DATE,
     dueWholeDay: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
     status: {
       type: DataTypes.ENUM,

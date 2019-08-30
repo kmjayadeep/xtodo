@@ -27,6 +27,7 @@ async function connect() {
     await connect();
     const app = express();
     app.use(bodyParser.json());
+    app.get('/api/task', taskController.fetchTasks);
     app.post('/api/task', taskController.addTask);
     app.use(errorHandler);
 
