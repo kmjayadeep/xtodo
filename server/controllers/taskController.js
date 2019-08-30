@@ -2,9 +2,20 @@ const Connection = require('sequelize-connect');
 
 const taskController = {};
 
-taskController.handlePost = async (req, res, next) => {
+taskController.addTask = async (req, res, next) => {
   const db = new Connection();
-  const task = req.body;
+  const {
+    title, description, dueBy, dueWholeDay, project,
+  } = req.body;
+  const task = {
+    title,
+    description,
+    dueBy,
+    dueWholeDay,
+    project,
+  };
+
+  console.log(task);
 
   try {
     const createdTask = await db.models.Task.create(task);

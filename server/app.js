@@ -27,7 +27,7 @@ async function connect() {
     await connect();
     const app = express();
     app.use(bodyParser.json());
-    app.post('/api/task', taskController.handlePost);
+    app.post('/api/task', taskController.addTask);
     app.use(errorHandler);
 
     app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
