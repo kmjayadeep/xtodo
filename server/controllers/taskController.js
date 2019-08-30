@@ -1,7 +1,8 @@
 import Connection from 'sequelize-connect';
 import Sequelize from 'sequelize';
+import moment, { min } from 'moment';
 
-const Op = Sequelize.Op;
+const { Op } = Sequelize;
 const taskController = {};
 
 taskController.addTask = async (req, res, next) => {
@@ -12,6 +13,7 @@ taskController.addTask = async (req, res, next) => {
     dueBy,
     dueWholeDay,
     project,
+    status,
   } = req.body;
   const task = {
     title,
@@ -19,6 +21,7 @@ taskController.addTask = async (req, res, next) => {
     dueBy,
     dueWholeDay,
     project,
+    status,
   };
 
   try {
@@ -29,10 +32,12 @@ taskController.addTask = async (req, res, next) => {
   }
 };
 
+// fetch tasks from last 7 days. Older tasks are shown only if it is not closed
 taskController.fetchTasks = async (_, res, next) => {
   const db = new Connection();
 
-  const minDate = new Date();
+  const today = moment().startOf('day');
+  const minDate = today.subtract(7, 'days').toDate();
 
   try {
     const tasks = await db.models.Task.findAll({
@@ -48,7 +53,27 @@ taskController.fetchTasks = async (_, res, next) => {
         }],
       },
     });
-    res.json(tasks);
+    const reduced = tasks.reduce((t, task) => {
+      if (!task.dueBy) {
+        t.noDueDate.push(task);
+        return t;
+      }
+      const day = moment(task.dueBy).startOf('day');
+      let key;
+      if (task.dueBy < minDate) {
+        key = 'older';
+      } else {
+        key = day.local().format('YYYY-MM-DD');
+      }
+      if (!t[key]) {
+        t[key] = [];
+      }
+      t[key].push(task);
+      return t;
+    }, {
+      noDueDate: [],
+    });
+    res.json(reduced);
   } catch (error) {
     next(error);
   }
