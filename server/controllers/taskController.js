@@ -1,6 +1,6 @@
 import Connection from 'sequelize-connect';
 import Sequelize from 'sequelize';
-import moment, { min } from 'moment';
+import moment from 'moment';
 
 const { Op } = Sequelize;
 const taskController = {};

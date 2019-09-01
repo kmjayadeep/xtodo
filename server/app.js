@@ -1,7 +1,11 @@
+import React from 'react';
 import express from 'express';
 import Connection from 'sequelize-connect';
 import path from 'path';
 import bodyParser from 'body-parser';
+import { renderToString } from 'react-dom/server';
+import App from '../common/App';
+import template from './template';
 
 import taskController from './controllers/taskController';
 import errorHandler from './middlewares/errorHandler';
@@ -30,6 +34,15 @@ async function connect() {
     app.get('/api/task', taskController.fetchTasks);
     app.post('/api/task', taskController.addTask);
     app.use(errorHandler);
+
+    app.get('/', (_, res) => {
+      const appString = renderToString(<App />);
+
+      res.send(template({
+        body: appString,
+        title: 'xTodo',
+      }));
+    });
 
     app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
   } catch (error) {
