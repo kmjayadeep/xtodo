@@ -53,27 +53,42 @@ taskController.fetchTasks = async (_, res, next) => {
         }],
       },
     });
+    const dateKeys = new Map();
+    const oldTasks = [];
+    const noDueDateTasks = [];
     const reduced = tasks.reduce((t, task) => {
-      if (!task.dueBy) {
-        t.noDueDate.push(task);
+      if (!task.dueBy || task.dueBy == null) {
+        noDueDateTasks.push(task);
         return t;
       }
       const day = moment(task.dueBy).startOf('day');
-      let key;
-      if (task.dueBy < minDate) {
-        key = 'older';
-      } else {
-        key = day.local().format('YYYY-MM-DD');
+      if (!day.isValid()) {
+        noDueDateTasks.push(task);
+        return t;
       }
+      if (task.dueBy < minDate) {
+        oldTasks.push(task);
+        return t;
+      }
+      const key = day.local().format('YYYY-MM-DD');
       if (!t[key]) {
         t[key] = [];
+        dateKeys.set(key, day);
       }
       t[key].push(task);
       return t;
-    }, {
-      noDueDate: [],
+    }, {});
+    const latestTasks = Object.keys(reduced).map((key) => (
+      {
+        date: dateKeys.get(key),
+        tasks: reduced[key],
+      }
+    ));
+    res.json({
+      oldTasks,
+      noDueDateTasks,
+      latestTasks,
     });
-    res.json(reduced);
   } catch (error) {
     next(error);
   }
