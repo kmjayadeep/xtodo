@@ -5,6 +5,18 @@ export function dateDiffInDays(date1, date2) {
   return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
 }
 
+export function getWeekDay(day) {
+  switch (day) {
+    case 0: return 'Sunday';
+    case 1: return 'Monday';
+    case 2: return 'Tuesday';
+    case 3: return 'Wednesday';
+    case 4: return 'Thursday';
+    case 5: return 'Friday';
+    default: return 'Saturday';
+  }
+}
+
 // Convert date object to readable day like Today, Yesterday etc
 export function dateToReadableDay(date) {
   const dateDiff = dateDiffInDays(new Date(), date);
@@ -15,6 +27,12 @@ export function dateToReadableDay(date) {
       return 'Today';
     case -1:
       return 'Yesterday';
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return getWeekDay(date.getDay());
     default:
       return date.toDateString();
   }

@@ -1,3 +1,6 @@
 .task-card {
   margin-bottom: 3rem;
 }
+.task-card .row {
+  justify-content: space-between;
+}

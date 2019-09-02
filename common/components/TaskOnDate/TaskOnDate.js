@@ -11,10 +11,18 @@ export default class TaskOnDate extends Component {
 
   render() {
     const { date, tasks } = this.props;
-    const dateString = dateToReadableDay(new Date(date));
+    const readableDate = dateToReadableDay(new Date(date));
+    const dateString = new Date(date).toDateString();
     return (
       <div className="task-card">
-        <h5 className="card-title">{dateString}</h5>
+        <div className="row">
+          <div clasName="col">
+            <h5 className="card-title">{readableDate}</h5>
+          </div>
+          <div clasName="col">
+            <h7 className="card-title">{dateString}</h7>
+          </div>
+        </div>
         <ul className="list-group">
           {tasks.map((task) => (
             <li className="list-group-item" key={task.id}>{task.title}</li>
