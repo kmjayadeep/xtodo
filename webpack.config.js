@@ -1,5 +1,7 @@
 const path = require('path');
-// const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 module.exports = {
   entry: './client/index.js',
@@ -10,12 +12,29 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+        },
+        'css-loader'],
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
-  }
+          loader: 'babel-loader',
+        },
+      },
+    ],
+  },
+  plugins: [
+    new CopyPlugin([
+      { from: './client/assets', to: 'assets' },
+    ]),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
+    }),
+  ],
 };
