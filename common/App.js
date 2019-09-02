@@ -1,31 +1,17 @@
-import React, { Component } from 'react';
-import TaskOnDate from './components/TaskOnDate';
+import React from 'react';
+import Header from './components/Header';
+import Body from './components/Body';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { latestTasks: [] };
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:3000/api/task')
-      .then((response) => response.json())
-      .then((tasks) => {
-        console.log(tasks);
-        this.setState(tasks);
-      });
-  }
-
-  render() {
-    const { latestTasks } = this.state;
-    return (
+export default function () {
+  return (
+    <div>
       <div className="container">
-        {
-          latestTasks.map((tasksOnDate) => (
-            <TaskOnDate date={tasksOnDate.date} tasks={tasksOnDate.tasks} key={tasksOnDate.date} />
-          ))
-        }
+        <Header />
       </div>
-    );
-  }
+      <br />
+      <div className="container">
+        <Body />
+      </div>
+    </div>
+  );
 }
