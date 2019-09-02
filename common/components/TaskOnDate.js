@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class TaskOnDate extends Component {
   constructor(props) {
@@ -7,8 +8,8 @@ export default class TaskOnDate extends Component {
   }
 
   render() {
-	  const { date, tasks } = this.props;
-		const dateString = new Date(date).toDateString();
+    const { date, tasks } = this.props;
+    const dateString = new Date(date).toDateString();
     return (
       <div>
         <div className="row">
@@ -29,3 +30,8 @@ export default class TaskOnDate extends Component {
     );
   }
 }
+
+TaskOnDate.propTypes = {
+  date: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
