@@ -37,8 +37,10 @@ taskController.fetchTasks = async (_, res, next) => {
   const db = new Connection();
 
   const today = moment().startOf('day');
+  const todayDate = today.toDate();
   const minDate = today.subtract(7, 'days').toDate();
 
+  // fetch everything from last 7 days and any open tasks beyond that
   try {
     const tasks = await db.models.Task.findAll({
       where: {
@@ -66,11 +68,11 @@ taskController.fetchTasks = async (_, res, next) => {
         noDueDateTasks.push(task);
         return t;
       }
-      if (task.dueBy < minDate) {
+      const key = day.local().format('YYYY-MM-DD');
+      if (day < todayDate) {
         oldTasks.push(task);
         return t;
       }
-      const key = day.local().format('YYYY-MM-DD');
       if (!t[key]) {
         t[key] = [];
         dateKeys.set(key, day);
