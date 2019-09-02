@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './TaskOnDate.css';
 
 export default class TaskOnDate extends Component {
@@ -8,7 +9,7 @@ export default class TaskOnDate extends Component {
   }
 
   render() {
-	  const { date, tasks } = this.props;
+    const { date, tasks } = this.props;
     const dateString = new Date(date).toDateString();
     return (
       <div className="task-card">
@@ -22,3 +23,8 @@ export default class TaskOnDate extends Component {
     );
   }
 }
+
+TaskOnDate.propTypes = {
+  date: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
