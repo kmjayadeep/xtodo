@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { dateToReadableDay } from '../../utils/dateUtils';
 import './TaskOnDate.css';
 
 export default class TaskOnDate extends Component {
@@ -10,7 +11,7 @@ export default class TaskOnDate extends Component {
 
   render() {
     const { date, tasks } = this.props;
-    const dateString = new Date(date).toDateString();
+    const dateString = dateToReadableDay(new Date(date));
     return (
       <div className="task-card">
         <h5 className="card-title">{dateString}</h5>

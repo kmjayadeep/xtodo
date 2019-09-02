@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function () {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <a className="navbar-brand" href="/">xTodo</a>
       <button
         className="navbar-toggler"
