@@ -17,3 +17,6 @@ node_modules/
 # logs
 
 *.log
+
+# Compiled components
+public/

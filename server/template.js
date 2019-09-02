@@ -8,6 +8,7 @@ export default ({ body, title }) => (
 
       <body>
         <div id="root">${body}</div>
+        <script src="./app.js"></script>
       </body>
     </html>
   `
