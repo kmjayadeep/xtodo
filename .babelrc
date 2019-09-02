@@ -6,5 +6,7 @@
   "ignore": [
     "node_modules",
   ],
-  "plugins": ["ignore-html-and-css-imports"]
+  "plugins": [
+    "css-modules-transform"
+  ]
 }
