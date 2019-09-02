@@ -5,6 +5,7 @@ export default ({ body, title }) => (
       <head>
         <title>${title}</title>
         <link rel="icon" href="/assets/favicon.ico">
+        <link rel="stylesheet" href="/main.css"/>
         <link rel="stylesheet" href="/assets/bootstrap.min.css">
       </head>
 

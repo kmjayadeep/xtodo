@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TaskOnDate from './TaskOnDate';
+import TaskOnDate from './TaskOnDate/TaskOnDate';
 
 export default class LatestTasks extends Component {
   constructor(props) {
