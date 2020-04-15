@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskOnDate from './TaskOnDate/TaskOnDate';
 
-export default class LatestTasks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { latestTasks: [] };
-  }
 
-  componentDidMount() {
+export default function LatestTasks() {
+
+  const [latestTasks, setLatestTasks] = useState([]);
+
+  useEffect(() => {
     fetch('http://localhost:3000/api/task')
       .then((response) => response.json())
       .then((tasks) => {
         console.log(tasks);
-        this.setState(tasks);
+        setLatestTasks(tasks.latestTasks);
       });
-  }
 
-  render() {
-    const { latestTasks } = this.state;
-    return (
-      <div className="container">
-        {
-          latestTasks.map((tasksOnDate) => (
-            <TaskOnDate date={tasksOnDate.date} tasks={tasksOnDate.tasks} key={tasksOnDate.date} />
-          ))
-        }
-      </div>
-    );
-  }
+  }, []);
+
+
+  return (
+    <div className="container">
+      {
+        latestTasks.map((tasksOnDate) => (
+          <TaskOnDate date={tasksOnDate.date} tasks={tasksOnDate.tasks} key={tasksOnDate.date} />
+        ))
+      }
+    </div>
+  );
 }

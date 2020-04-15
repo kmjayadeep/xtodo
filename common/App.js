@@ -9,7 +9,6 @@ export default function () {
       <div className="container">
         <Header />
       </div>
-      <br />
       <div className="container main-body">
         <Body />
       </div>

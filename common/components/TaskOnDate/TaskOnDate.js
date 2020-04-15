@@ -58,11 +58,11 @@ export default class TaskOnDate extends Component {
     return (
       <div className="task-card">
         <div className="row">
-          <div clasName="col">
+          <div className="col">
             <h5 className="card-title">{readableDate}</h5>
           </div>
-          <div clasName="col">
-            <h7 className="card-title">{dateString}</h7>
+          <div className="col">
+            <h6 className="card-title">{dateString}</h6>
           </div>
         </div>
         <ul className="list-group">
