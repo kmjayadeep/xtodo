@@ -4,7 +4,6 @@ export default function createTaskModel(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    project: DataTypes.STRING,
     description: DataTypes.STRING,
     dueBy: DataTypes.DATEONLY,
     status: {

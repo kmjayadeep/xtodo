@@ -12,7 +12,7 @@ taskController.addTask = async (req, res, next) => {
     description,
     dueBy,
     dueWholeDay,
-    project,
+    projectId,
     status,
   } = req.body;
   const task = {
@@ -20,7 +20,7 @@ taskController.addTask = async (req, res, next) => {
     description,
     dueBy,
     dueWholeDay,
-    project,
+    ProjectId: projectId,
     status,
   };
 
@@ -54,6 +54,9 @@ taskController.fetchTasks = async (_, res, next) => {
           },
         }],
       },
+      include: {
+        model: db.models.Project,
+      }
     });
     const dateKeys = new Map();
     const oldTasks = [];
