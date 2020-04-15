@@ -89,6 +89,7 @@ taskController.fetchTasks = async (_, res, next) => {
         tasks: reduced[key],
       }
     ));
+    latestTasks.sort((a, b) => a.date.isAfter(b.date));
     res.json({
       oldTasks,
       noDueDateTasks,
