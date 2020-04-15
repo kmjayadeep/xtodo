@@ -1,10 +1,7 @@
-import React from 'react';
 import express from 'express';
 import Connection from 'sequelize-connect';
 import path from 'path';
 import bodyParser from 'body-parser';
-import { renderToString } from 'react-dom/server';
-import App from '../common/App';
 import template from './template';
 
 import taskController from './controllers/taskController';
@@ -36,12 +33,7 @@ async function connect() {
     app.use(errorHandler);
 
     app.get('/', (_, res) => {
-      const appString = renderToString(<App />);
-
-      res.send(template({
-        body: appString,
-        title: 'xTodo',
-      }));
+      res.send(template());
     });
 
     app.use(express.static('public'));

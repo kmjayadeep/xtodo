@@ -6,21 +6,14 @@ export default function createTaskModel(sequelize, DataTypes) {
     },
     project: DataTypes.STRING,
     description: DataTypes.STRING,
-    dueBy: DataTypes.DATE,
-    dueWholeDay: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
+    dueBy: DataTypes.DATEONLY,
     status: {
       type: DataTypes.ENUM,
-      values: ['OPEN', 'IN_PROGRESS', 'CLOSED'],
+      values: ['OPEN', 'COMPLETED', 'POSTPONED', 'CANCELLED'],
       defaultValue: 'OPEN',
     },
   }, {
     timestamps: false,
-    associate(models) {
-      console.log(models);
-    },
   });
   return Task;
 }
