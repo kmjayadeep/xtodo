@@ -29,10 +29,15 @@ async function connect() {
     await connect();
     const app = express();
     app.use(bodyParser.json());
+
     app.get('/api/project', projectController.fetchProjects);
     app.post('/api/project', projectController.addProject);
+    app.delete('/api/project/:projectId', projectController.deleteProject);
+
     app.get('/api/task', taskController.fetchTasks);
     app.post('/api/task', taskController.addTask);
+    app.delete('/api/task/:taskId', taskController.deleteTask);
+
     app.use(errorHandler);
 
     app.get('/', (_, res) => {

@@ -99,4 +99,20 @@ taskController.fetchTasks = async (_, res, next) => {
   }
 };
 
+taskController.deleteTask = async (req, res, next) => {
+  const db = new Connection();
+  const { taskId } = req.params;
+
+  try {
+    await db.models.Task.destroy({
+      where: {
+        id: taskId,
+      },
+    });
+    res.json('success');
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default taskController;

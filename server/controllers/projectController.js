@@ -35,7 +35,22 @@ projectController.fetchProjects = async (_, res, next) => {
   } catch (error) {
     next(error);
   }
+};
 
+projectController.deleteProject = async (req, res, next) => {
+  const db = new Connection();
+  const { projectId } = req.params;
+
+  try {
+    await db.models.Project.destroy({
+      where: {
+        id: projectId,
+      },
+    });
+    res.json('success');
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default projectController;
