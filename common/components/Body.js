@@ -34,7 +34,7 @@ export default function Body() {
 
   return (
     <div className="row">
-      <div className="col-md-3">
+      <div className="col-md-3 d-none d-md-block">
         <div className="list-group">
           <a href="#top" className="list-group-item list-group-item-action active">
             Latest Tasks
@@ -47,7 +47,7 @@ export default function Body() {
           </a>
         </div>
       </div>
-      <div className="col-md-9">
+      <div className="col">
         {/* <Switch>
           <Route path="/new">
             <NewTask/>

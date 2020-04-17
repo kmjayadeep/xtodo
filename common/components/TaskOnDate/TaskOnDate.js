@@ -1,11 +1,63 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { dateToReadableDay } from '../../utils/dateUtils';
 import './TaskOnDate.css';
+import Task from './Task';
 
-export default class TaskOnDate extends Component {
+
+export default function ({ date, tasks }) {
+
+  const readableDate = dateToReadableDay(new Date(date));
+  const dateString = new Date(date).toDateString();
+
+  const onAddTask = useCallback(() => {
+    //
+  }, []);
+
+
+  return (
+    <div className="task-card">
+      <div className="row">
+        <div className="col">
+          <h5 className="card-title">{readableDate}</h5>
+        </div>
+        <div className="col">
+          <h6 className="card-title text-right">{dateString}</h6>
+        </div>
+      </div>
+      <ul className="list-group">
+        {tasks.map((task) => (
+          <li className="list-group-item" key={task.id}>
+            <Task task={task} />
+          </li>
+        ))}
+      </ul>
+      {/* {newTask != null
+        && (
+          <div className="row">
+            <div className="col">
+              <input type="text" text={newTask.title} onChange={this.onTitleChange} />
+            </div>
+            <div className="col">
+              <button type="button" className="btn btn-primary" onClick={this.onSaveTask}>
+                Save
+              </button>
+            </div>
+          </div>
+        )} */}
+      <div className="row">
+        <div className="col">
+          <button type="button" className="btn btn-primary" onClick={onAddTask}>
+            Add Task
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+class TaskOnDate {
   constructor(props) {
-    super(props);
     this.state = {
       newTask: null,
     };
@@ -55,43 +107,6 @@ export default class TaskOnDate extends Component {
     const readableDate = dateToReadableDay(new Date(date));
     const dateString = new Date(date).toDateString();
     const { newTask } = this.state;
-    return (
-      <div className="task-card">
-        <div className="row">
-          <div className="col">
-            <h5 className="card-title">{readableDate}</h5>
-          </div>
-          <div className="col">
-            <h6 className="card-title">{dateString}</h6>
-          </div>
-        </div>
-        <ul className="list-group">
-          {tasks.map((task) => (
-            <li className="list-group-item" key={task.id}>{task.title}</li>
-          ))}
-        </ul>
-        { newTask != null
-        && (
-          <div className="row">
-            <div className="col">
-              <input type="text" text={newTask.title} onChange={this.onTitleChange} />
-            </div>
-            <div className="col">
-              <button type="button" className="btn btn-primary" onClick={this.onSaveTask}>
-                Save
-              </button>
-            </div>
-          </div>
-        )}
-        <div className="row">
-          <div className="col">
-            <button type="button" className="btn btn-primary" onClick={this.onAddTask}>
-              Add Task
-            </button>
-          </div>
-        </div>
-      </div>
-    );
   }
 }
 

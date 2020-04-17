@@ -22,3 +22,11 @@
   display: block;
   background-color: #00000082;
 }
+
+.task-links button {
+  margin: 0 0.2rem;
+}
+
+.task-title.completed {
+  text-decoration: line-through;
+}

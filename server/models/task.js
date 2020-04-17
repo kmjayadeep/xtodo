@@ -8,7 +8,7 @@ export default function createTaskModel(sequelize, DataTypes) {
     dueBy: DataTypes.DATEONLY,
     status: {
       type: DataTypes.ENUM,
-      values: ['OPEN', 'COMPLETED', 'POSTPONED', 'CANCELLED'],
+      values: ['OPEN', 'COMPLETED', 'POSTPONED'],
       defaultValue: 'OPEN',
     },
   }, {
