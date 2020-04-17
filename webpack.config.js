@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
-  entry: './client/index.js',
+  entry: ['@babel/polyfill','./client/index.js'],
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'app.js',

@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/polyfill": "^7.8.7",
     "@babel/register": "^7.9.0",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "body-parser": "^1.19.0",
