@@ -10,9 +10,11 @@ export default function ({ date, tasks }) {
   const readableDate = dateToReadableDay(new Date(date));
   const dateString = new Date(date).toDateString();
 
+  const [newTask, setNewTask] = useState(null);
+
   const onAddTask = useCallback(() => {
-    //
-  }, []);
+    setNewTask({});
+  }, [setNewTask]);
 
 
   return (
@@ -22,7 +24,12 @@ export default function ({ date, tasks }) {
           <h5 className="card-title">{readableDate}</h5>
         </div>
         <div className="col">
-          <h6 className="card-title text-right">{dateString}</h6>
+          <h6 className="card-title text-right date-display">{dateString}</h6>
+        </div>
+        <div className="col-auto">
+          <button type="button" className="btn btn-sm add-task-btn" onClick={onAddTask} title="Quick Add">
+            <i className="fa fa-plus" />
+          </button>
         </div>
       </div>
       <ul className="list-group">
@@ -32,26 +39,54 @@ export default function ({ date, tasks }) {
           </li>
         ))}
       </ul>
-      {/* {newTask != null
+      {newTask != null
         && (
-          <div className="row">
-            <div className="col">
-              <input type="text" text={newTask.title} onChange={this.onTitleChange} />
+          <div className="add-task-form">
+            <div className="row">
+              <div className="col">
+                <input
+                  type="text"
+                  className="form-control"
+                  autoFocus
+                  placeholder="Do some task..."
+                  text={newTask.title}
+                  onChange={(e) => {
+                    setNewTask({
+                      ...newTask,
+                      title: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+              <div className="col-auto">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    console.log(newTask);
+                  }}
+                >
+                  Save
+                </button>
+              </div>
             </div>
-            <div className="col">
-              <button type="button" className="btn btn-primary" onClick={this.onSaveTask}>
-                Save
-              </button>
-            </div>
+            {/* <div className="row">
+              <div className="col">
+                <textarea
+                  className="form-control"
+                  placeholder="Description here"
+                  text={newTask.description}
+                  onChange={(e) => {
+                    setNewTask({
+                      ...newTask,
+                      description: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+            </div> */}
           </div>
-        )} */}
-      <div className="row">
-        <div className="col">
-          <button type="button" className="btn btn-primary" onClick={onAddTask}>
-            Add Task
-          </button>
-        </div>
-      </div>
+        )}
     </div>
   );
 }

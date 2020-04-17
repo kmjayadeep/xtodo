@@ -1,3 +1,8 @@
+.valign-center{
+  display: flex;
+  align-items: center;
+}
+
 .main-body {
   margin-top: 6rem;
 }
@@ -27,6 +32,10 @@
   margin: 0 0.2rem;
 }
 
+.task-title {
+  margin-bottom: 0;
+}
+
 .task-title.completed {
   text-decoration: line-through;
 }
@@ -35,4 +44,17 @@
   display: inline-block;
   width: 2.3rem;
   height: 2.3rem;
+}
+
+.add-task-btn {
+  border: 1px solid black !important;
+}
+
+.card-title.date-display {
+  margin-top: 0.3rem;
+  margin-bottom: 0;
+}
+
+.add-task-form {
+  margin-top: 1rem;
 }

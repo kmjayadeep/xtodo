@@ -24,14 +24,14 @@ export default ({ task }) => {
 
   return (
     <div className="row justify-content-between task">
-      <div className="col-auto">
+      <div className="col-auto valign-center">
         <input
           type="checkbox"
           checked={checked}
           onChange={onSelectChange}
         />
       </div>
-      <div className="col">
+      <div className="col valign-center">
         <h6 className={`task-title ${checked ? 'completed text-secondary' : ''}`}><b>{task.title}</b></h6>
       </div>
       <div className="col-auto task-links">
