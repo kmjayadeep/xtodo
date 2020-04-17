@@ -38,15 +38,14 @@ export default ({ task }) => {
         {loading && (
           <div className="loader">
             <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-              <circle cx="50" cy="50" r="32" strokeWidth="8" stroke="#18bc9c" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
-                <animateTransform attributeName="transform" type="rotate" dur="2s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+              <circle cx="50" cy="50" r="32" strokeWidth="8" stroke="#18bc9c" strokeDasharray="50.26548245743669 50.26548245743669" fill="none" strokeLinecap="round">
+                <animateTransform attributeName="transform" type="rotate" dur="2s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;360 50 50" />
               </circle>
-              <circle cx="50" cy="50" r="23" stroke-width="8" stroke="#2c3e50" stroke-dasharray="36.12831551628262 36.12831551628262" stroke-dashoffset="36.12831551628262" fill="none" stroke-linecap="round">
-                <animateTransform attributeName="transform" type="rotate" dur="2s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;-360 50 50"></animateTransform>
+              <circle cx="50" cy="50" r="23" strokeWidth="8" stroke="#2c3e50" strokeDasharray="36.12831551628262 36.12831551628262" strokeDashoffset="36.12831551628262" fill="none" strokeLinecap="round">
+                <animateTransform attributeName="transform" type="rotate" dur="2s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;-360 50 50" />
               </circle>
             </svg>
           </div>
-
         )}
         <button className="btn btn-light" type="button" title="Edit Task">
           <i className="fa fa-pencil" />
