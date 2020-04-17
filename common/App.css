@@ -1,3 +1,17 @@
 .main-body {
   margin-top: 6rem;
 }
+
+.navbar-nav .nav-link.add-button {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.add-button b{
+  margin-left: 0.5rem;
+}
+
+.bg-dark.navbar-dark .navbar-nav .nav-link.add-button:hover,
+.bg-dark.navbar-dark .navbar-nav .nav-link.add-button:active {
+  color: #18BC9C !important;
+}
