@@ -38,7 +38,7 @@ export default ({ task }) => {
         {loading && (
           <div className="loader">
             <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-              <circle cx="50" cy="50" r="32" stroke-width="8" stroke="#18bc9c" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
+              <circle cx="50" cy="50" r="32" strokeWidth="8" stroke="#18bc9c" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
                 <animateTransform attributeName="transform" type="rotate" dur="2s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
               </circle>
               <circle cx="50" cy="50" r="23" stroke-width="8" stroke="#2c3e50" stroke-dasharray="36.12831551628262 36.12831551628262" stroke-dashoffset="36.12831551628262" fill="none" stroke-linecap="round">

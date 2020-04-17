@@ -54,7 +54,7 @@ export default function Body() {
           </Route>
         </Switch> */}
         <LatestTasks latestTasks={latestTasks} />
-        <LatestTasks latestTasks={oldTasks} />
+        {/* <LatestTasks latestTasks={oldTasks} /> */}
         <LatestTasks latestTasks={noDueDateTasks} />
       </div>
     </div>
