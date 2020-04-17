@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 
-export default function ({ show, onClose }) {
+export default function ({ onClose }) {
 
   const handleEscape = useCallback((event) => {
     if (event.keyCode === 27) {
@@ -12,11 +12,11 @@ export default function ({ show, onClose }) {
     document.addEventListener('keydown', handleEscape, false);
     return () => {
       document.removeEventListener('keydown', handleEscape, false);
-    }
-  }, []);
+    };
+  }, [handleEscape]);
 
   return (
-    <div className={`modal new-task fade ${show ? 'show' : ''}`}>
+    <div className="modal new-task fade show">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">

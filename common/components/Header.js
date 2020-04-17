@@ -33,12 +33,13 @@ export default function () {
           </a>
         </div>
       </nav>
-      <NewTask
-        show={show}
-        onClose={() => {
-          setShow(false);
-        }}
-      />
+      {show && (
+        <NewTask
+          onClose={() => {
+            setShow(false);
+          }}
+        />
+      )}
     </>
   );
 }
