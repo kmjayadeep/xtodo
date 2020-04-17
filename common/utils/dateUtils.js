@@ -17,6 +17,14 @@ export function getWeekDay(day) {
   }
 }
 
+function getMonth(month) {
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  return monthNames[month];
+
+}
+
 // Convert date object to readable day like Today, Yesterday etc
 export function dateToReadableDay(date) {
   const dateDiff = dateDiffInDays(new Date(), date);
@@ -34,6 +42,6 @@ export function dateToReadableDay(date) {
     case 6:
       return getWeekDay(date.getDay());
     default:
-      return date.toDateString();
+      return `${getMonth(date.getMonth())} ${date.getDate()}`;
   }
 }
