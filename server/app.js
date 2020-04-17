@@ -40,11 +40,12 @@ async function connect() {
 
     app.use(errorHandler);
 
-    app.get('/', (_, res) => {
+    app.use(express.static('public'));
+
+    app.get('*', (_, res) => {
       res.send(template());
     });
 
-    app.use(express.static('public'));
 
     app.listen(PORT, () => console.log(`Server running at port : ${PORT}`));
   } catch (error) {

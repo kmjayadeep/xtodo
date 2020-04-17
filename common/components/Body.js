@@ -1,5 +1,15 @@
 import React, { useEffect } from 'react';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+
 import LatestTasks from './LatestTasks';
+import NewTask from './NewTask/NewTask';
 import { useStateValue } from '../state/state';
 import { fetchTasks } from '../services/api';
 
@@ -38,6 +48,11 @@ export default function Body() {
         </div>
       </div>
       <div className="col-md-9">
+        {/* <Switch>
+          <Route path="/new">
+            <NewTask/>
+          </Route>
+        </Switch> */}
         <LatestTasks latestTasks={latestTasks} />
         <LatestTasks latestTasks={oldTasks} />
         <LatestTasks latestTasks={noDueDateTasks} />

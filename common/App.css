@@ -5,6 +5,7 @@
 .navbar-nav .nav-link.add-button {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  cursor: pointer;
 }
 
 .add-button b{
@@ -12,6 +13,12 @@
 }
 
 .bg-dark.navbar-dark .navbar-nav .nav-link.add-button:hover,
+.bg-dark.navbar-dark .navbar-nav .nav-link.add-button:focus,
 .bg-dark.navbar-dark .navbar-nav .nav-link.add-button:active {
   color: #18BC9C !important;
+}
+
+.new-task.show {
+  display: block;
+  background-color: #00000082;
 }
