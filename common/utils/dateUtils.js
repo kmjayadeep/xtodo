@@ -22,7 +22,6 @@ function getMonth(month) {
     'July', 'August', 'September', 'October', 'November', 'December',
   ];
   return monthNames[month];
-
 }
 
 // Convert date object to readable day like Today, Yesterday etc

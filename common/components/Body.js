@@ -39,12 +39,12 @@ export default function Body() {
           <a href="#top" className="list-group-item list-group-item-action active">
             Latest Tasks
           </a>
-          <a href="#top" className="list-group-item list-group-item-action">
+          {/* <a href="#top" className="list-group-item list-group-item-action">
             Old Tasks
           </a>
           <a href="#top" className="list-group-item list-group-item-action">
             Anytime Tasks
-          </a>
+          </a> */}
         </div>
       </div>
       <div className="col">

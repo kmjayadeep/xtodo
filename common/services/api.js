@@ -6,6 +6,14 @@ export async function fetchTasks() {
   return result;
 }
 
+export async function deleteTask(taskId) {
+  const res = await fetch(`${API_URL}/task/${taskId}`, {
+    method: 'DELETE',
+  });
+  const result = await res.json();
+  return result;
+}
+
 export async function addTask(task) {
   const res = await fetch(`${API_URL}/task`, {
     headers: {

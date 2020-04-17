@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useStateValue } from '../../state/state';
+import { deleteTask } from '../../services/api';
 
 export default ({ task }) => {
 
@@ -21,6 +22,14 @@ export default ({ task }) => {
       type: 'setStale',
     });
   }, [checked, setChecked, dispatch]);
+
+  const onDelete = useCallback(async () => {
+    setLoading(true);
+    await deleteTask(task.id);
+    dispatch({
+      type: 'setStale',
+    });
+  }, [checked, dispatch]);
 
   return (
     <div className="row justify-content-between task">
@@ -47,10 +56,10 @@ export default ({ task }) => {
             </svg>
           </div>
         )}
-        <button className="btn btn-light" type="button" title="Edit Task">
+        {/* <button className="btn btn-light" type="button" title="Edit Task">
           <i className="fa fa-pencil" />
-        </button>
-        <button className="btn btn-light" type="button" title="Delete Task">
+        </button> */}
+        <button className="btn btn-light" type="button" title="Delete Task" onClick={onDelete}>
           <i className="fa fa-trash text-danger" />
         </button>
       </div>
