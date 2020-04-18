@@ -36,6 +36,7 @@ async function connect() {
 
     app.get('/api/task', taskController.fetchTasks);
     app.post('/api/task', taskController.addTask);
+    app.post('/api/task/:taskId', taskController.updateTask);
     app.delete('/api/task/:taskId', taskController.deleteTask);
 
     app.use(errorHandler);

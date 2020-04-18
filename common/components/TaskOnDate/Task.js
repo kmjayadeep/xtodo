@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useStateValue } from '../../state/state';
-import { deleteTask } from '../../services/api';
+import { deleteTask, updateTask } from '../../services/api';
 
 export default ({ task }) => {
 
@@ -15,9 +15,14 @@ export default ({ task }) => {
     }
   }, [isStale]);
 
-  const onSelectChange = useCallback(() => {
-    setChecked(!checked);
+  const onSelectChange = useCallback(async () => {
+    const newStatus = !checked;
+    setChecked(newStatus);
     setLoading(true);
+    await updateTask({
+      ...task,
+      status: newStatus ? 'COMPLETED' : 'OPEN',
+    });
     dispatch({
       type: 'setStale',
     });

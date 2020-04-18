@@ -116,4 +116,30 @@ taskController.deleteTask = async (req, res, next) => {
   }
 };
 
+taskController.updateTask = async (req, res, next) => {
+  const db = new Connection();
+  const { taskId } = req.params;
+
+  try {
+    const originalTask = await db.models.Task.findOne({
+      where: {
+        id: taskId,
+      },
+    });
+    const task = req.body;
+    const {
+      title, dueBy, description, ProjectId, status,
+    } = task;
+    originalTask.title = typeof title === 'undefined' ? originalTask.title : title;
+    originalTask.dueBy = typeof dueBy === 'undefined' ? originalTask.dueBy : dueBy;
+    originalTask.description = typeof description === 'undefined' ? originalTask.description : description;
+    originalTask.ProjectId = typeof ProjectId === 'undefined' ? originalTask.ProjectId : ProjectId;
+    originalTask.status = status || originalTask.status;
+    const saved = await originalTask.save();
+    res.json(saved);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default taskController;

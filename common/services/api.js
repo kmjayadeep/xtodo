@@ -25,3 +25,15 @@ export async function addTask(task) {
   const result = await res.json();
   return result;
 }
+
+export async function updateTask(task) {
+  const res = await fetch(`${API_URL}/task/${task.id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(task),
+  });
+  const result = await res.json();
+  return result;
+}
