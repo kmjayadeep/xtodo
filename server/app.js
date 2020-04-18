@@ -10,14 +10,26 @@ import errorHandler from './middlewares/errorHandler';
 
 const PORT = 3000;
 
+const MYSQL_HOST = process.env.MYSQL_HOST || 'localhost';
+const MYSQL_USERNAME = process.env.MYSQL_USERNAME || 'root';
+const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || '';
+const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'xtodo';
+
 async function connect() {
   const discover = [path.join(__dirname, '/models')];
   const matcher = () => true;
   await new Connection(
-    'xtodo',
-    'root',
-    '', {
+    MYSQL_DATABASE,
+    MYSQL_USERNAME,
+    MYSQL_PASSWORD,
+    {
       dialect: 'mysql',
+      host: MYSQL_HOST,
+      retry: {
+        max: 3,
+        timeout: 10000,
+        backoffBase: 5000,
+      },
     },
     discover,
     matcher,
