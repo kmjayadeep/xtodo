@@ -83,8 +83,20 @@ export default function ({ date, tasks }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={saveNewTask}
+                  style={{
+                    marginRight: '0.2rem',
+                  }}
                 >
-                  Save
+                  <i className="fa fa-save" />
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    setNewTask(null);
+                  }}
+                >
+                  <i className="fa fa-times" />
                 </button>
               </div>
             </div>
