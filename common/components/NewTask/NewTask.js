@@ -1,10 +1,27 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useCallback, useState } from 'react';
 
+import { addTask } from '../../services/api';
+import { useStateValue } from '../../state/state';
+
 export default function ({ onClose }) {
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueBy, setDueBy] = useState(new Date().toISOString().split('T')[0]);
+  const [{ isStale }, dispatch] = useStateValue();
 
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
+
+  const handleSave = useCallback(async (task) => {
+    await addTask(task);
+    dispatch({
+      type: 'setStale',
+    });
+    handleClose();
+  }, [handleClose, dispatch]);
 
   const handleEscape = useCallback((event) => {
     if (event.keyCode === 27) {
@@ -34,21 +51,55 @@ export default function ({ onClose }) {
             <form>
               <div className="form-group">
                 <label htmlFor="inputTitle">Title</label>
-                <input type="text" className="form-control" id="inputTitle" placeholder="Finish office work..." autoFocus />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputTitle"
+                  placeholder="Finish office work..."
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  autoFocus
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="inputDate">Due date</label>
-                <input type="date" className="form-control" id="inputDate" />
+                <input
+                  type="date"
+                  className="form-control"
+                  value={dueBy}
+                  onChange={(e) => {
+                    setDueBy(e.target.value);
+                    console.log(dueBy);
+                  }}
+                  id="inputDate"
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="description">Description</label>
-                <textarea className="form-control" id="description" placeholder="description" />
+                <textarea
+                  className="form-control"
+                  id="description"
+                  placeholder="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </div>
             </form>
 
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => {
+                handleSave({
+                  title,
+                  dueBy,
+                  description,
+                });
+              }}>
               <i className="fa fa-save" />
             </button>
             <button type="button" className="btn btn-secondary" onClick={handleClose}>
