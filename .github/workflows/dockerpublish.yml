@@ -50,7 +50,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=kmjayadeep/todo
+          IMAGE_ID=kmjayadeep/xtodo
        
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
