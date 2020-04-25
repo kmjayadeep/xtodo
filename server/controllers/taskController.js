@@ -24,6 +24,10 @@ taskController.addTask = async (req, res, next) => {
     status,
   };
 
+  if (!title) {
+    return next('title cannot be emoty');
+  }
+
   try {
     const createdTask = await db.models.Task.create(task);
     res.json(createdTask);
@@ -37,45 +41,63 @@ taskController.fetchTasks = async (_, res, next) => {
   const db = new Connection();
 
   const today = moment().startOf('day');
-  const todayDate = today.toDate();
-  const minDate = today.subtract(7, 'days').toDate();
 
-  // fetch everything from last 7 days and any open tasks beyond that
   try {
-    const tasks = await db.models.Task.findAll({
+    const tasksPromise = db.models.Task.findAll({
       where: {
-        [Op.or]: [{
-          dueBy: {
-            [Op.gt]: minDate,
-          },
-        }, {
-          status: {
-            [Op.ne]: 'CLOSED',
-          },
-        }],
+        dueBy: {
+          [Op.gte]: today,
+        },
       },
-      include: {
-        model: db.models.Project,
-      }
+      // include: {
+      //   model: db.models.Project,
+      // },
     });
+
+    const oldTasksPromise = db.models.Task.findAll({
+      where: {
+        dueBy: {
+          [Op.lt]: today,
+        },
+      },
+      order: [
+        ['dueBy', 'ASC'],
+      ],
+    });
+
+    const noDueDateTasksPromise = db.models.Task.findAll({
+      where: {
+        dueBy: {
+          [Op.eq]: null,
+        },
+      },
+    });
+
+    const overDueTasksPromise = db.models.Task.findAll({
+      where: {
+        dueBy: {
+          [Op.lt]: today,
+        },
+        status: {
+          [Op.ne]: 'COMPLETED',
+        },
+      },
+      order: [
+        ['dueBy', 'ASC'],
+      ],
+    });
+
+    const [tasks, oldTasks, noDueDateTasks, overDueTasks] = await Promise.all([
+      tasksPromise,
+      oldTasksPromise,
+      noDueDateTasksPromise,
+      overDueTasksPromise,
+    ]);
+
     const dateKeys = new Map();
-    const oldTasks = [];
-    const noDueDateTasks = [];
     const reduced = tasks.reduce((t, task) => {
-      if (!task.dueBy || task.dueBy == null) {
-        noDueDateTasks.push(task);
-        return t;
-      }
       const day = moment(task.dueBy).startOf('day');
-      if (!day.isValid()) {
-        noDueDateTasks.push(task);
-        return t;
-      }
       const key = day.local().format('YYYY-MM-DD');
-      if (day < todayDate) {
-        oldTasks.push(task);
-        return t;
-      }
       if (!t[key]) {
         t[key] = [];
         dateKeys.set(key, day);
@@ -94,6 +116,7 @@ taskController.fetchTasks = async (_, res, next) => {
       oldTasks,
       noDueDateTasks,
       latestTasks,
+      overDueTasks,
     });
   } catch (error) {
     next(error);
