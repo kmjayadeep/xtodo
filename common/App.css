@@ -59,3 +59,12 @@
 .add-task-form {
   margin-top: 1rem;
 }
+
+.sidebar-pill {
+  float: right;
+}
+
+.active .sidebar-pill {
+  color: black;
+  background-color: white;
+}

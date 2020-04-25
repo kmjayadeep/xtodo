@@ -16,7 +16,7 @@ import { fetchTasks } from '../services/api';
 export default function Body() {
 
   const [{
-    latestTasks, oldTasks, noDueDateTasks, isStale,
+    latestTasks, oldTasks, noDueDateTasks, overDueTasks, isStale,
   }, dispatch] = useStateValue();
 
   useEffect(() => {
@@ -37,13 +37,16 @@ export default function Body() {
       <div className="col-md-3 d-none d-md-block">
         <div className="list-group">
           <a href="#" className="list-group-item list-group-item-action active">
-            Latest Tasks
+            Current Tasks
+            <span className="badge badge-info badge-pill sidebar-pill">{latestTasks.length}</span>
           </a>
           <a href="#" className="list-group-item list-group-item-action">
             Old Tasks
+            <span className="badge badge-info badge-pill sidebar-pill">{oldTasks.length}</span>
           </a>
           <a href="#" className="list-group-item list-group-item-action">
             Anytime Tasks
+            <span className="badge badge-info badge-pill sidebar-pill">{noDueDateTasks.length}</span>
           </a>
         </div>
       </div>
@@ -53,7 +56,7 @@ export default function Body() {
             <NewTask/>
           </Route>
         </Switch> */}
-        <LatestTasks latestTasks={latestTasks} />
+        <LatestTasks latestTasks={latestTasks} overDueTasks={overDueTasks} />
         {/* <LatestTasks latestTasks={oldTasks} /> */}
         {/* <LatestTasks latestTasks={noDueDateTasks} /> */}
       </div>
