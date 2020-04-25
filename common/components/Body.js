@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -19,6 +19,8 @@ export default function Body() {
     latestTasks, oldTasks, noDueDateTasks, overDueTasks, isStale,
   }, dispatch] = useStateValue();
 
+  const [currentTaskCount, setCurrentTaskCount] = useState(0);
+
   useEffect(() => {
     if (!isStale) {
       return;
@@ -32,13 +34,20 @@ export default function Body() {
     })();
   }, [isStale]);
 
+  useEffect(() => {
+    const count = Object.values(latestTasks).reduce((c, task)=>{
+      return c + task.tasks.length;
+    }, 0);
+    setCurrentTaskCount(count);
+  }, [latestTasks, setCurrentTaskCount]);
+
   return (
     <div className="row">
       <div className="col-md-3 d-none d-md-block">
         <div className="list-group">
           <a href="#" className="list-group-item list-group-item-action active">
             Current Tasks
-            <span className="badge badge-info badge-pill sidebar-pill">{latestTasks.length}</span>
+            <span className="badge badge-info badge-pill sidebar-pill">{currentTaskCount}</span>
           </a>
           <a href="#" className="list-group-item list-group-item-action">
             Old Tasks
