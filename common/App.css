@@ -53,6 +53,7 @@
 .card-title.date-display {
   margin-top: 0.3rem;
   margin-bottom: 0;
+  font-size: 0.8rem;
 }
 
 .add-task-form {

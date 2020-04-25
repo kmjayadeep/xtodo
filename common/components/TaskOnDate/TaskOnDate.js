@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { useCallback, useState } from 'react';
 import { dateToReadableDay } from '../../utils/dateUtils';
 import { addTask } from '../../services/api';
